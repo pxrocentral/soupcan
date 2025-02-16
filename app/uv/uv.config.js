@@ -1,5 +1,5 @@
 self.__uv$config = {
-    prefix: '/soup/can/',
+    prefix: '/app/soup-can/',
     bare: "https://sysadmin.us.kg/",
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
