@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>SoupCan</title>
-    <link rel="icon" type="image/png" href="brand/favicon.ico">
+    <link rel="icon" type="image/png" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/brand/favicon.ico">
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #111010; /* Background color */
+            background: #111010;
             color: white;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: auto;
         }
-
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1; /* Keep particles behind other content */
-        }
-
         .navbar {
             display: flex;
-            justify-content: flex-start;  
+            justify-content: flex-start;
             align-items: center;
             background: #111010;
             position: fixed;
@@ -35,44 +25,25 @@
             width: 100%;
             z-index: 1000;
         }
-
-        .logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            margin-right: 20px; 
-        }
-
-        .logo img {
-            width: 40px;
-            margin-right: 10px;
-        }
-
         .nav-links {
             list-style: none;
             display: flex;
             margin: 0;
             padding: 0;
         }
-
         .nav-links li {
             margin-left: 20px;
         }
-
         .nav-links a {
             color: white;
             text-decoration: none;
             padding: 8px 16px;
             transition: background 0.3s;
         }
-
         .nav-links a:hover {
             background: #575757;
             border-radius: 4px;
         }
-
         @media (max-width: 768px) {
             .nav-links {
                 flex-direction: column;
@@ -83,11 +54,9 @@
                 left: 0;
                 background: #111;
             }
-
             .navbar.active .nav-links {
                 display: flex;
             }
-
             .toggle {
                 display: block;
                 cursor: pointer;
@@ -95,37 +64,35 @@
                 font-size: 24px;
             }
         }
-
         .toggle {
-            display: none;
+            display: none; /* Hide toggle button by default */
         }
-
         .container {
-            display: flex; 
-            justify-content: center; 
+            display: flex; /* Use flexbox for a horizontal layout */
+            justify-content: center; /* Center the items */
             padding: 20px;
-            margin-top: 70px; 
+            margin-top: 70px;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
         }
-
         .image-item {
             position: relative;
             cursor: pointer;
             text-align: center;
-            width: 80%; 
-            max-width: 150px; 
-            margin: 0 10px; 
+            width: 80%;
+            max-width: 150px;
+            margin: 0 10px;
         }
-
         .image-item img {
             width: 100%;
+            height: 150px; /* Set a specific height */
+            object-fit: cover; /* Ensures the image covers the space without distortion */
             border-radius: 10px;
             transition: transform 0.3s;
         }
-
         .image-item:hover img {
             transform: scale(1.05);
         }
-
         .label {
             position: absolute;
             bottom: 10px;
@@ -136,73 +103,50 @@
             padding: 5px 10px;
             border-radius: 5px;
         }
-
-        #searchbar {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 56px;
+        /* Add extra margin to all apps */
+        .app-item {
+            margin-top: 30px; /* Adjust this value for desired spacing */
+        }
+        #game-search-form {
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 10px;
+        }
+        #game-searchbar {
+            display: inline-block;
+            position: relative;
+            width: 300px;
+            height: 40px;
             border: transparent;
             background-color: #222222;
+            border-radius: 10px;
         }
-        
-        #ua {
-            background-color: #222222;
-            color: #ffffff;
-            font-size: 1.5rem;
-            position: relative;
-            top: 50%;
-            left: 16px;
+        #game-search-input {
+            width: calc(100% - 40px);
+            height: 100%;
+            padding-left: 40px;
             border: none;
             outline: none;
-            transform: translate(0, -50%);
-            width: 526px;
-            height: 50px;
-            font-weight: bold;
-            color: #ffffff;
-            caret-color: #ffffff;
+            background-color: #222222;
+            color: #FFF;
+            font-size: 1rem;
+            border-radius: 10px;
         }
-
-        #ua::placeholder {
-            color: #ffffff;
-            opacity: 0.5;
-        }
-        
-        #search-icon {
+        #game-search-icon {
+            position: absolute;
             top: 50%;
             left: 10px;
             transform: translate(0, -50%);
             color: #FFFFFF;
-            position: relative;
-            font-size: 2rem;
-            height: 44px;
-        }
-
-        #uvf {
-            width: 100%;
-            height: calc(100% - 50px);
-            border: none;
-        }
-
-        #welcome {
-            position: fixed;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
         }
     </style>
+     <script src="/js/close-tab.js"></script>
 </head>
 <body>
-
-    <!-- Particles.js Container -->
     <div id="particles-js"></div>
-
     <nav class="navbar">
-        <div class="toggle" onclick="document.querySelector('.navbar').classList.toggle('active')">&#9776;</div>
+        <div class="toggle" onclick="document.querySelector('.navbar').classList.toggle('active')">☰</div>
         <ul class="nav-links">
             <li><a href="/index.html"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="/g/"><i class="fa-solid fa-gamepad"></i></a></li>
@@ -211,28 +155,50 @@
             <li><a href="/p/"><i class="fa-solid fa-handshake"></i></a></li>
         </ul>
     </nav>
-    <div id="welcome">
-        <h2>Welcome To Soup Can</h2>
-    </div>
-    <form id="uf" autocomplete="off" autocapitalize="off">
-        <input id="us" value="https://duckduckgo.com/?q=%s" type="hidden">
-        <div id="searchbar">
-           <i class="fas fa-search" id="search-icon"></i>
-           <input id="ua" type="text" placeholder="Search or type a URL" class="form__input">
+
+    <!-- Search Bar -->
+    <form id="game-search-form" autocomplete="off" autocapitalize="off">
+        <div id="game-searchbar">
+            <i class="fas fa-search" id="game-search-icon"></i>
+            <input id="game-search-input" type="text" placeholder="Search games">
         </div>
     </form>
-    <div class="desc left-margin">
-        <p id="ue"></p>
-        <pre id="uc"></pre>
+
+    <!-- Container with all games and apps -->
+    <div class="container">
+        <div class="image-item app-item" data-label="Slope">
+            <a href="/g/play/?url=/g/game/slope/">
+                <img src="/g/icons/slope.png" alt="Slope">
+                <div class="label">Slope</div>
+            </a>
+        </div>  
+        <div class="image-item app-item" data-label="2D Rocket League">
+            <a href="/g/play/?url=/g/game/2drocket/">
+                <img src="/g/icons/2drocket.png" alt="2D Rocket League">
+                <div class="label">2D Rocket League</div>
+            </a>
+        </div>  
     </div>
-<script>
+
+    <!-- Initialize particles.js -->
+    <script>
         document.querySelector('.toggle').addEventListener('click', function() {
             document.querySelector('.navbar').classList.toggle('active');
         });
-    </script>
-    <script src="/app/uv/uv.bundle.js" charset="UTF-8" defer></script>
-    <script src="/app/uv/uv.config.js" charset="UTF-8" defer></script>
-    <script src="/app/worker.js" charset="UTF-8" defer></script>
-    <script src="/app/search.js" charset="UTF-8" defer></script>
-    <script src="/app/index.js" charset="UTF-8" defer></script>
-</body></html>
+
+        document.getElementById('game-search-input').addEventListener('input', function() {
+            var filter = this.value.toLowerCase();
+            var gameItems = document.querySelectorAll('.image-item');
+            
+            gameItems.forEach(function(item) {
+                var label = item.getAttribute('data-label').toLowerCase();
+                if (label.includes(filter)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>  
+</body>
+</html>
