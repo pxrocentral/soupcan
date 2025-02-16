@@ -6,7 +6,7 @@
     <title>SoupCan</title>
     <link rel="icon" type="image/x-icon" href="/brand/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-     <script src="/js/close-tab.js"></script>
+    <script src="/js/close-tab.js"></script>
     <style>
         body {
             margin: 0;
@@ -86,13 +86,13 @@
             gap: 3px;
             margin-right: 3px;
         }
-        .fullscreen-button a, .refresh-button a {
+        .fullscreen-button a, .refresh-button a, .export-button a {
             color: white;
             text-decoration: none;
             padding: 8px 16px;
             transition: background 0.3s;
         }
-        .fullscreen-button a:hover, .refresh-button a:hover {
+        .fullscreen-button a:hover, .refresh-button a:hover, .export-button a:hover {
             background: #575757;
             border-radius: 4px;
         }
@@ -116,6 +116,9 @@
             </div>
             <div class="refresh-button">
                 <a href="#" id="refreshLink"><i class="fa-solid fa-arrows-rotate"></i></a>
+            </div>
+            <div class="export-button">
+                <a href="#" id="exportLink"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
             </div>
         </div>
     </nav>
@@ -147,6 +150,16 @@
             e.preventDefault();
             const myIframe = document.getElementById('myIframe');
             myIframe.src = myIframe.src;
+        });
+
+        // Export functionality
+        document.getElementById('exportLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const urlParams = new URLSearchParams(window.location.search);
+            const exportUrl = urlParams.get('url');
+            if (exportUrl) {
+                window.location.href = exportUrl;
+            }
         });
     </script>
 </body>
