@@ -1,5 +1,5 @@
 self.__uv$config = {
-    prefix: '/app/login/',
+    prefix: '/app/soup/',
     bare: "https://sysadmin.us.kg/",
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
