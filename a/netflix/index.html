@@ -79,11 +79,11 @@
             border-radius: 10px;
             box-shadow: 0 0 0 5px white;
         }
-        .fullscreen-button, .refresh-button {
+        .button-container {
+            display: flex;
+            align-items: center;
+            gap: 3px;
             margin-right: 3px;
-        }
-        .refresh-button {
-            margin-right: 13px;
         }
         .fullscreen-button a, .refresh-button a {
             color: white;
@@ -109,11 +109,13 @@
             <li><a href="/s/"><i class="fa-solid fa-cog"></i></a></li>
             <li><a href="/p/"><i class="fa-solid fa-handshake"></i></a></li>
         </ul>
-        <div class="fullscreen-button">
-            <a href="#" id="fullscreenLink"><i class="fa-solid fa-expand"></i></a>
-        </div>
-        <div class="refresh-button">
-            <a href="#" id="refreshLink"><i class="fa-solid fa-arrows-rotate"></i></a>
+        <div class="button-container">
+            <div class="fullscreen-button">
+                <a href="#" id="fullscreenLink"><i class="fa-solid fa-expand"></i></a>
+            </div>
+            <div class="refresh-button">
+                <a href="#" id="refreshLink"><i class="fa-solid fa-arrows-rotate"></i></a>
+            </div>
         </div>
     </nav>
     <main class="site-main">
