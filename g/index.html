@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SoupCan</title>
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111010;
+            color: white;
+            overflow: auto;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background: #111010;
+            position: fixed;
+            top: 0;
+            height: 44px;
+            width: 100%;
+            z-index: 1000;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: background 0.3s;
+        }
+        .nav-links a:hover {
+            background: #575757;
+            border-radius: 4px;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: #111;
+            }
+            .navbar.active .nav-links {
+                display: flex;
+            }
+            .toggle {
+                display: block;
+                cursor: pointer;
+                color: white;
+                font-size: 24px;
+            }
+        }
+        .toggle {
+            display: none; /* Hide toggle button by default */
+        }
+        .container {
+            display: flex; /* Use flexbox for a horizontal layout */
+            justify-content: center; /* Center the items */
+            padding: 20px;
+            margin-top: 70px;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
+        }
+        .image-item {
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+            width: 80%;
+            max-width: 150px;
+            margin: 0 10px;
+        }
+        .image-item img {
+            width: 100%;
+            height: 150px; /* Set a specific height */
+            object-fit: cover; /* Ensures the image covers the space without distortion */
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .image-item:hover img {
+            transform: scale(1.05);
+        }
+        .label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        /* Add extra margin to all apps */
+        .app-item {
+            margin-top: 30px; /* Adjust this value for desired spacing */
+        }
+        #game-search-form {
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 10px;
+        }
+        #game-searchbar {
+            display: inline-block;
+            position: relative;
+            width: 300px;
+            height: 40px;
+            border: transparent;
+            background-color: #222222;
+            border-radius: 10px;
+        }
+        #game-search-input {
+            width: calc(100% - 40px);
+            height: 100%;
+            padding-left: 40px;
+            border: none;
+            outline: none;
+            background-color: #222222;
+            color: #FFF;
+            font-size: 1rem;
+            border-radius: 10px;
+        }
+        #game-search-icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translate(0, -50%);
+            color: #FFFFFF;
+            font-size: 1.5rem;
+        }
+    </style>
+    <script src="/crisp.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <nav class="navbar">
+        <div class="toggle" onclick="document.querySelector('.navbar').classList.toggle('active')">☰</div>
+        <ul class="nav-links">
+            <li><a href="/index.html"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="/g/"><i class="fa-solid fa-gamepad"></i></a></li>
+            <li><a href="/a/"><i class="fa-solid fa-table-cells"></i></a></li>
+            <li><a href="/s/"><i class="fa-solid fa-cog"></i></a></li>
+            <li><a href="/p/"><i class="fa-solid fa-handshake"></i></a></li>
+        </ul>
+    </nav>
+
+    <!-- Search Bar -->
+    <form id="game-search-form" autocomplete="off" autocapitalize="off">
+        <div id="game-searchbar">
+            <i class="fas fa-search" id="game-search-icon"></i>
+            <input id="game-search-input" type="text" placeholder="Search games">
+        </div>
+    </form>
+
+    <!-- Container with all games and apps -->
+    <div class="container">
+        <div class="image-item app-item" data-label="Slope">
+            <a href="/g/slope/index.html">
+                <img src="storage/load/slope/slope.webp" alt="Slope">
+                <div class="label">Slope</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Polytrack">
+            <a href="/g/polytrack/index.html">
+                <img src="storage/load/polytrack/polytrack-min.jpg" alt="Polytrack">
+                <div class="label">Polytrack</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Basket Random">
+            <a href="/g/basketrandom/index.html">
+                <img src="storage/load/basketrandom/basketrandom.png" alt="Basket Random">
+                <div class="label">Basket Random</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Soccer Random">
+            <a href="/g/soccerrandom/index.html">
+                <img src="storage/load/soccerrandom/soccerrandom.png" alt="Soccer Random">
+                <div class="label">Soccer Random</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Volley Random">
+            <a href="/g/volleyrandom/index.html">
+                <img src="storage/load/volleyrandom/volleyrandom.png" alt="Volley Random">
+                <div class="label">Volley Random</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Boxing Random">
+            <a href="/g/boxingrandom/index.html">
+                <img src="storage/load/boxingrandom/boxingrandom.png" alt="Boxing Random">
+                <div class="label">Boxing Random</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="2048">
+            <a href="/g/2048/index.html">
+                <img src="/images/images.png" alt="2048">
+                <div class="label">2048</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="xx142-b2exe">
+            <a href="/g/xx142-b2exe/index.html">
+                <img src="storage/load/xx142-b2exe/virus.jpg" alt="xx142-b2exe">
+                <div class="label">xx142-b2exe</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="10 Minutes Till Dawn">
+            <a href="/g/10tilldawn/index.html">
+                <img src="storage/load/10tilldawn/10tilldawn.png" alt="10 Minutes Till Dawn">
+                <div class="label">10 Minutes Till Dawn</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="ADOFAI">
+            <a href="/g/ADOFAI/index.html">
+                <img src="storage/load/ADOFAI/ADOFAI.png" alt="ADOFAI">
+                <div class="label">ADOFAI</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="There is no game">
+            <a href="g/thereisnogame/index.html">
+                <img src="storage/load/thereisnogame/thereisnogame.jpg" alt="There is no game">
+                <div class="label">There is no game</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="1 on 1 soccer">
+            <a href="/g/1on1soccer/index.html">
+                <img src="storage/load/1on1soccer/logo.jpg" alt="1 on 1 soccer">
+                <div class="label">1 on 1 soccer</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Cookie Clicker">
+            <a href="/g/cookieclicker/index.html">
+                <img src="storage/load/cookieclicker/cookieclicker.png" alt="Cookie CLicker">
+                <div class="label">Cookie Clicker</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Bitlife">
+            <a href="/g/bitlife/index.html">
+                <img src="storage/load/bitlife/bitlife.jpg" alt="Bitlife">
+                <div class="label">Bitlife</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="SnowRider">
+            <a href="/g/snowrider/index.html">
+                <img src="storage/load/snowrider/snowrider.png" alt="SnowRider">
+                <div class="label">SnowRider</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="RedVsBluez">
+            <a href="/g/redvsbluez/index.html">
+                <img src="storage/load/redvsbluez/redvsblue.png" alt="RedVsBluez">
+                <div class="label">RedVsBluez</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="HordeKiller">
+            <a href="/g/hordekiller/index.html">
+                <img src="storage/load/hordekiller/game/logo.png" alt="HordeKiller">
+                <div class="label">HordeKiller</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="2DRocketLeague">
+            <a href="/g/2drocket/index.html">
+                <img src="storage/load/2drocket/2drocket.png" alt="2DRocketLeague">
+                <div class="label">2DRocketLeague</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Cluster Rush">
+            <a href="/g/clusterrush/index.html">
+                <img src="/storage/load/clusterrush/cluster.png" alt="Cluster Rush">
+                <div class="label">Cluster Rush</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Bad Ice Cream">
+            <a href="/g/badicecream/index.html">
+                <img src="/storage/load/badicecream/badice.png" alt="Bad Ice Cream">
+                <div class="label">Bad Ice Cream</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Time Shooter 3">
+            <a href="/g/timeshooter3/index.html">
+                <img src="/storage/load/timeshooter3/game/logo.png" alt="Time Shooter 3">
+                <div class="label">Time Shooter 3</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="CubeFieldV2">
+            <a href="/g/cubefieldv2/index.html">
+                <img src="/storage/load/cubefieldv2/cubefieldv2.png" alt="CubeFieldV2">
+                <div class="label">CubeFieldV2</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="CubeField">
+            <a href="/g/cubefield/">
+                <img src="/storage/load/cubefield/cubefield.jpg" alt="CubeField">
+                <div class="label">CubeField</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Geometry Dash Scratch">
+            <a href="/g/geodash/">
+                <img src="/storage/load/geodash/geo.png" alt="Geometry Dash Scratch">
+                <div class="label">Geometry Dash Scratch</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Bloons TD 2">
+            <a href="/g/btd2/">
+                <img src="/storage/load/btd2/bloonstd2.png" alt="Bloons TD 2">
+                <div class="label">Bloons TD 2</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Bloxors">
+            <a href="/g/bloxors/">
+                <img src="/storage/load/bloxors/block.png" alt="Bloxors">
+                <div class="label">Bloxors</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Geometry Dash Lite">
+            <a href="/g/gdlite/">
+                <img src="/storage/load/gdlite/gdlite.webp" alt="Geometry Dash Lite">
+                <div class="label">Geometry Dash Lite</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Dante">
+            <a href="/g/dante/">
+                <img src="/storage/load/dante/icon.jpg" alt="Dante">
+                <div class="label">Dante</div>
+            </a>
+        </div>
+        <div class="image-item app-item" data-label="Ad Clicker">
+            <a href="/g/addclicker/">
+                <img src="/storage/ads/add-clicker.jpg" alt="Ad Clicker">
+                <div class="label">Ad Clicker</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Initialize particles.js -->
+    <script>
+        document.querySelector('.toggle').addEventListener('click', function() {
+            document.querySelector('.navbar').classList.toggle('active');
+        });
+
+        document.getElementById('game-search-input').addEventListener('input', function() {
+            var filter = this.value.toLowerCase();
+            var gameItems = document.querySelectorAll('.image-item');
+            
+            gameItems.forEach(function(item) {
+                var label = item.getAttribute('data-label').toLowerCase();
+                if (label.includes(filter)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>  
+</body>
+</html>
